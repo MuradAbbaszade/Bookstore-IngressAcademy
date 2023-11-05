@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - include:
+      file: classpath:/db/changelog/changes/user.sql
+  - include:
+      file: classpath:/db/changelog/changes/author.sql
+  - include:
+      file: classpath:/db/changelog/changes/student.sql
+  - include:
+      file: classpath:/db/changelog/changes/book.sql
+  - include:
+      file: classpath:/db/changelog/changes/student_book.sql
+  - include:
+      file: classpath:/db/changelog/changes/authority.sql
+  - include:
+      file: classpath:/db/changelog/changes/user_authority.sql
+  - include:
+      file: classpath:/db/changelog/changes/subscribe.sql

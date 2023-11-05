@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=bookstore
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+  app:
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/bookstore?useSSL=false",
+        "spring.datasource.username" : "root",
+        "spring.datasource.password" : "",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
+        "spring.jpa.hibernate.ddl-auto" : "update"
+      }'
+    depends_on:
+      - mysqldb
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .m2:/root/.m2
+
+
+volumes:
+  db:
